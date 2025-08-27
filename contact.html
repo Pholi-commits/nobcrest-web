@@ -1,0 +1,134 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Noble Crest Horses</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 12px 0 6px;
+      color: #555;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #555;
+    }
+    .success-message {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Contact Us</h2>
+    <form id="contactForm" action="https://formspree.io/f/xanbrdro" method="POST">
+      
+      <label for="name">Full Name *</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="phone">Cell Phone *</label>
+      <input type="tel" name="phone" id="phone" required>
+
+      <label for="email">Email *</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="confirm_email">Confirm Email *</label>
+      <input type="email" name="confirm_email" id="confirm_email" required>
+
+      <label for="city_state">City & State *</label>
+      <input type="text" name="city_state" id="city_state" required>
+
+      <label for="horse_name">Horse Name *</label>
+      <select name="horse_name" id="horse_name" required>
+        <option value="">--- Select Choice ---</option>
+        <option value="Horse A">Horse A</option>
+        <option value="Horse B">Horse B</option>
+        <option value="Horse C">Horse C</option>
+      </select>
+
+      <label for="message">Comment or Message *</label>
+      <textarea name="message" id="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+      ✅ Thank you! Your message has been sent successfully.
+    </div>
+  </div>
+
+  <script>
+    
+    const form = document.getElementById("contactForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        form.reset();
+        successMessage.style.display = "block";
+      } else {
+        alert("❌ There was an error sending your message. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
+
